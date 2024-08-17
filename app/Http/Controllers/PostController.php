@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,7 @@ class PostController extends Controller
 
     public function list()
     {
-        $posts = Post::query()->orderBy('created_at', 'desc')->get();
+        $posts = Post::query()->orderBy('created_at', 'desc')->paginate(20);
         return view('dashboard.posts.list', compact('posts'));
     }
 
@@ -38,14 +39,17 @@ class PostController extends Controller
         return view('dashboard.posts.edit', ['post' => $post]);
     }
 
-    public function update(Request $request, $id)
+    public function update(PostUpdateRequest $request, $id)
     {
+        $requestData = $request->validated();
+        Post::query()->where('id', $id)->update($requestData);
         return redirect()->route('dashboard.posts.list')->with('success', trans('Updated'));
     }
 
     public function destroy($id)
     {
-
+        Post::query()->where('id', $id)->delete();
+        return redirect()->route('dashboard.posts.list')->with('success', trans('Removed ').' id: '.$id);
     }
 
 }

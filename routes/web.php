@@ -16,15 +16,16 @@ Route::get('/news', [PageController::class, 'posts'])->name('site.posts');
 
 
 Auth::routes();
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])
+        ->middleware('auth')
+        ->name('dashboard');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware('auth')
-    ->name('dashboard');
-
-Route::get('dashboard/posts/list', [PostController::class, 'list'])->name('dashboard.posts.list');
-Route::get('dashboard/posts/create', [PostController::class, 'create'])->name('dashboard.posts.create');
-Route::post('dashboard/posts/store', [PostController::class, 'store'])->name('dashboard.posts.store');
-Route::get('dashboard/posts/edit/{id}', [PostController::class, 'edit'])->name('dashboard.posts.edit');
-Route::put('dashboard/posts/update/{id}', [PostController::class, 'update'])->name('dashboard.posts.update');
-Route::delete('dashboard/posts/destroy/{id}', [PostController::class, 'destroy'])->name('dashboard.posts.destroy');
+    Route::get('posts/list', [PostController::class, 'list'])->name('dashboard.posts.list');
+    Route::get('posts/create', [PostController::class, 'create'])->name('dashboard.posts.create');
+    Route::post('posts/store', [PostController::class, 'store'])->name('dashboard.posts.store');
+    Route::get('posts/edit/{id}', [PostController::class, 'edit'])->name('dashboard.posts.edit');
+    Route::put('posts/update/{id}', [PostController::class, 'update'])->name('dashboard.posts.update');
+    Route::get('posts/destroy/{id}', [PostController::class, 'destroy'])->name('dashboard.posts.destroy');
+})->middleware('auth');
 
