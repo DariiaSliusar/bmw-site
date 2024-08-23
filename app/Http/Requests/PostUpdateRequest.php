@@ -26,6 +26,7 @@ class PostUpdateRequest extends FormRequest
             'slug' => "required|unique:posts,slug,$this->id",
             'short' => 'nullable',
             'content' => 'nullable',
+            'thumbnail' => 'nullable',
         ];
     }
 }

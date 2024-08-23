@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostUpdateRequest;
 use App\Models\Post;
+use File;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -22,15 +23,19 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $thumbnail = $request->file('thumbnail');
+        $path = $thumbnail->store('thumbnails', 'public');
+
         $post = Post::query()->create([
             'user_id' => auth()->id(),
             'title' => $request->input('title'),
             'slug' => $request->input('slug'),
             'short' => $request->input('short'),
             'content' => $request->input('content'),
+            'thumbnail' => $path,
         ]);
 
-        return redirect()->route('dashboard.posts.list')->with('success', trans('Created'));
+        return redirect()->route('dashboard.posts.edit', $post->id)->with('success', trans('Created'));
     }
 
     public function edit($id)
@@ -42,8 +47,21 @@ class PostController extends Controller
     public function update(PostUpdateRequest $request, $id)
     {
         $requestData = $request->validated();
-        Post::query()->where('id', $id)->update($requestData);
-        return redirect()->route('dashboard.posts.list')->with('success', trans('Updated'));
+        $post = Post::query()->where('id', $id)->first();
+
+        if($request->hasFile('thumbnail')){
+            $path = $request->file('thumbnail')->store('thumbnails', 'public');
+
+            if ($post->thumbnail) {
+                File::delete($post->thumbnail);
+            }
+
+            $requestData['thumbnail'] = $path;
+        }
+
+        $post->update($requestData);
+
+        return back()->with('success', trans('Updated'));
     }
 
     public function destroy($id)

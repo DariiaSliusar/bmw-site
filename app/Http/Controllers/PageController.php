@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -18,6 +19,8 @@ class PageController extends Controller
 
     public function posts()
     {
-        return view('site.posts');
+        $posts = Post::query()->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('site.posts', compact('posts'));
     }
 }

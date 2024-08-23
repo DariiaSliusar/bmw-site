@@ -1,51 +1,32 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="row">
+    <div class="row">
+        @foreach($posts as $post)
+            <div class="col-12 col-md-6">
+                <div class="card m-3">
 
-    <div class="col-12">
-        <div class="card m-3">
-            <img src="{{ asset('assets/img/slider/img-4.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    @if($post->thumbnail)
+                        <img src="/storage/{{ $post->thumbnail }}" class="card-img-top" alt="...">
+                    @endif
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $post->title }}</h5>
+                        <p class="card-text">
+                            {!! $post->short !!}
+                        </p>
+                        <p class="card-text">
+                            <small class="text-body-secondary">
+                                {{ $post->created_at }}
+                            </small>
+                        </p>
+                    </div>
+                </div>
             </div>
+        @endforeach
+        <div class="my-3">
+            {{ $posts->links() }}
         </div>
     </div>
-
-    <div class="col-12">
-        <div class="card m-3">
-            <img src="{{ asset('assets/img/slider/img-4.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12">
-        <div class="card m-3">
-            <img src="{{ asset('assets/img/slider/img-4.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12">
-        <div class="card m-3">
-            <img src="{{ asset('assets/img/slider/img-4.jpg') }}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection

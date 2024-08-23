@@ -16,7 +16,7 @@ Route::get('/news', [PageController::class, 'posts'])->name('site.posts');
 
 
 Auth::routes();
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])
         ->middleware('auth')
         ->name('dashboard');
@@ -27,5 +27,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('posts/edit/{id}', [PostController::class, 'edit'])->name('dashboard.posts.edit');
     Route::put('posts/update/{id}', [PostController::class, 'update'])->name('dashboard.posts.update');
     Route::get('posts/destroy/{id}', [PostController::class, 'destroy'])->name('dashboard.posts.destroy');
-})->middleware('auth');
+});
 
