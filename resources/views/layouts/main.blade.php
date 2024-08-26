@@ -15,6 +15,7 @@
     <link href="{{ asset('assets/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 
 
+
 </head>
 <body>
     <div class="container">
@@ -28,6 +29,8 @@
 
 
     <script src="{{ asset('assets/bootstrap/js/bootstrap.js') }}"></script>
+
+
 
 </body>
 </html>

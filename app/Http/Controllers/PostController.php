@@ -70,4 +70,19 @@ class PostController extends Controller
         return redirect()->route('dashboard.posts.list')->with('success', trans('Removed ').' id: '.$id);
     }
 
+    //Site pages
+    public function posts()
+    {
+        $posts = Post::query()->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('site.posts', compact('posts'));
+    }
+
+    public function show($id)
+    {
+        $post = Post::query()->where('id', $id)->first();
+
+        return view('site.post', compact('post'));
+    }
+
 }

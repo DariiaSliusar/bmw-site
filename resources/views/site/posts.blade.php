@@ -7,11 +7,13 @@
                 <div class="card m-3">
 
                     @if($post->thumbnail)
-                        <img src="/storage/{{ $post->thumbnail }}" class="card-img-top" alt="...">
+                        <img src="/storage/{{ $post->thumbnail }}" class="card-img-top" alt="{{ $post->title }}">
                     @endif
 
                     <div class="card-body">
-                        <h5 class="card-title">{{ $post->title }}</h5>
+                        <a href="{{route('site.post', $post->id)}}">
+                            <h5 class="card-title">{{ $post->title }}</h5>
+                        </a>
                         <p class="card-text">
                             {!! $post->short !!}
                         </p>

@@ -11,7 +11,9 @@ Route::get('/', [PageController::class, 'landing'])->name('site.landing');
 
 Route::get('/contacts', [PageController::class, 'contacts'])->name('site.contacts');
 
-Route::get('/news', [PageController::class, 'posts'])->name('site.posts');
+Route::get('/news', [PostController::class, 'posts'])->name('site.posts');
+
+Route::get('/news/{id}', [PostController::class, 'show'])->name('site.post');
 
 
 
