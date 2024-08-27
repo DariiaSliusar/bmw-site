@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
@@ -14,6 +15,8 @@ Route::get('/contacts', [PageController::class, 'contacts'])->name('site.contact
 Route::get('/news', [PostController::class, 'posts'])->name('site.posts');
 
 Route::get('/news/{id}', [PostController::class, 'show'])->name('site.post');
+
+Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
 
 
 

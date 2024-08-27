@@ -23,8 +23,13 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $thumbnail = $request->file('thumbnail');
-        $path = $thumbnail->store('thumbnails', 'public');
+        $path = null;
+
+        if($request->hasFile('thumbnail')){
+            $thumbnail = $request->file('thumbnail');
+            $path = $thumbnail->store('thumbnails', 'public');
+        }
+
 
         $post = Post::query()->create([
             'user_id' => auth()->id(),

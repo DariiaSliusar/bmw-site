@@ -29,12 +29,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="short" class="form-label">{{ __('Short text') }}</label>
-                                <textarea class="form-control" id="short" rows="3"
+                                <textarea class="form-control d-editor" id="short" rows="3"
                                           name="short">{{$post->short}}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="content" class="form-label">{{ __('Content') }}</label>
-                                <textarea class="form-control" id="content" rows="7"
+                                <textarea class="form-control d-editor" id="content" rows="7"
                                           name="content">{{$post->content}}</textarea>
                             </div>
                             <div class="mb-3">
@@ -70,4 +70,5 @@
             </div>
         </div>
     </div>
+    <x-dash.ckeditor/>
 @endsection
