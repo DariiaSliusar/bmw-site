@@ -64,5 +64,6 @@
             </div>
         </div>
     </div>
-   <x-dash.ckeditor/>
+   <!-- <x-dash.ckeditor/> -->
+   <x-dash.editor/>
 @endsection
