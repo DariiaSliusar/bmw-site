@@ -18,6 +18,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('dashboard.posts.list') }}">{{ __('Posts') }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard.notifications.list') }}">{{ __('Notifications') }}</a>
+                    </li>
 
                 </ul>
             @endauth

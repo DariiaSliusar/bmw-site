@@ -17,6 +17,7 @@ class PageController extends Controller
         return view('site.contacts');
     }
 
+
     public function posts()
     {
         $posts = Post::query()->orderBy('created_at', 'desc')->paginate(10);
