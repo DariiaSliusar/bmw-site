@@ -49,6 +49,7 @@ class NotificationController extends Controller
 
     public function destroy($id)
     {
-
+        Notification::query()->where('id', $id)->delete();
+        return redirect()->route('dashboard.notifications.list')->with('success', trans('Removed ').' id: '.$id);
     }
 }

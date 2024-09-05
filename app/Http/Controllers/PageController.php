@@ -9,7 +9,9 @@ class PageController extends Controller
 {
     public function landing()
     {
-        return view('site.landing');
+        $posts = Post::query()->orderBy('created_at', 'desc')->limit(3)->get();
+
+        return view('site.landing', compact('posts'));
     }
 
     public function contacts()

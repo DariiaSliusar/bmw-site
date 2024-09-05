@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TestController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/welcome', 'welcome')->name('welcome');
@@ -45,4 +47,6 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('notifications/destroy/{id}', [NotificationController::class, 'destroy'])
         ->name('dashboard.notifications.destroy');
 });
+
+Route::get('test/{name}/{lname?}', [TestController::class, 'index'])->name('test.index');
 
